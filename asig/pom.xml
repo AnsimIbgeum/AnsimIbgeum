@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
     <groupId>kb04.ditto</groupId>
-    <artifactId>jgig</artifactId>
+    <artifactId>asig</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>  <name>jgig</name>
     <description>지금입금</description>
