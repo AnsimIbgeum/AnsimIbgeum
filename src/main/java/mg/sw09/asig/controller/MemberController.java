@@ -194,13 +194,14 @@ public class MemberController {
         if (mem_id != null) {
             String savedPassword = memberMapper.getPassword(mem_id);
 
-            if (savedPassword != null && savedPassword.equals(inputPassword)) {
-                // 비밀번호가 일치하는 경우 회원 탈퇴 처리
+            //passwordEncoder로 암호화된 비밀번호 비교하도록 수정
+            if (savedPassword != null && passwordEncoder.matches(inputPassword, savedPassword)) {
+                //비밀번호가 일치하는 경우 회원 탈퇴 처리
                 memberMapper.delete(mem_id);
                 session.invalidate();
                 return "redirect:/jgig/login";
             } else {
-                // 비밀번호가 일치하지 않는 경우 에러 메시지를 리다이렉트로 전달
+                //비밀번호가 일치하지 않는 경우 에러 메시지를 리다이렉트로 전달
                 session.setAttribute("error", "비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
                 return "redirect:/jgig/member_delete"; // 비밀번호 다시 입력 페이지로 리다이렉트
                 }
