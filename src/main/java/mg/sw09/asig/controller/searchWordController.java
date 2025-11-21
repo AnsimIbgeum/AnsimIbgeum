@@ -122,7 +122,7 @@ public class searchWordController {
 		StringBuilder sb = new StringBuilder();
 		try {
 
-			String serviceKey = "gfZIEuYu6OT%2Br8PNu78IYHzGerjvx0Lz8tfR90DZ9u1dJakIv42vQSVjK9803ivmD%2FO9eReLqIIrFuZd%2F6LoHg%3D%3D";
+			String serviceKey = "540ee9ab1a71353d67520d92c26d11550d8b93c0da6d2842d3ef1cd3db5894c2";
 
 			StringBuilder urlBuilder = new StringBuilder(
 					"https://api.seibro.or.kr/openapi/service/FnTermSvc/getFinancialTermMeaning"); /* URL */

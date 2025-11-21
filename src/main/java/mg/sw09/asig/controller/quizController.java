@@ -52,8 +52,7 @@ public class quizController {
 		} else {
 			model.addAttribute("quiz_stat", "F");
 		}
-		
-		
+
 		String URL = "https://m.kbcapital.co.kr/cstmrPtct/fnncInfoSqre/fnncTmng.kbc";
 		Document doc = Jsoup.connect(URL).data("targetRow", "127").data("rowSize","4").get();
 		Elements el = doc.select("ul[class=\"sp-accord nospace\"]");
