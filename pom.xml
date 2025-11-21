@@ -63,6 +63,11 @@
 		    <version>1.13.1</version>
 		</dependency>
 
+        <!--스프링 시큐리티(Spring Security) 사용을 위해 추가 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
