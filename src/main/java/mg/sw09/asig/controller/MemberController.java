@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,9 @@ public class MemberController {
     @Autowired
     private PointMapper pointMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("/jgig/register")
     public String toSignupPage() { // 회원가입 페이지
         return "member/register";
@@ -34,7 +38,11 @@ public class MemberController {
         try {
             String ssn = ssn_1 + ssn_2;
             dto.setSsn(ssn);
-            
+
+            //비밀번호 암호화하여 저장
+            String encodedPassword = passwordEncoder.encode(dto.getMem_pw());
+            dto.setMem_pw(encodedPassword);
+
             memberMapper.signup(dto);
             model.addAttribute("successMessage", "회원가입에 성공하였습니다.");
 
@@ -55,40 +63,42 @@ public class MemberController {
 
     @PostMapping("/jgig/login")
     public String login(MemberDto dto, HttpSession session, Model model, HttpServletResponse response,  @RequestParam(value = "remember_me", required = false) String rememberMe) { // 로그인
-        MemberDto loginDto = memberMapper.login(dto);
-        // 세션에서 로그인 정보를 확인
-        
-        if (loginDto == null) { // 로그인 실패
+        //아이디로 회원 조회
+        MemberDto loginDto = memberMapper.detail(dto.getMem_id());
+
+        //loginDTO가 존재하고 비밀번호가 일치하면 로그인 성공
+        //기존 로직은 SQL에서 비번 검사하기에 BCrypt로는 검사 불가능
+        if (loginDto != null && passwordEncoder.matches(dto.getMem_pw(), loginDto.getMem_pw())) {
+            // 로그인 성공 로직
+            session.setAttribute("loggedIn", true);
+            String id = loginDto.getMem_id();
+            session.setAttribute("mem_id", id);
+            String ssn = loginDto.getSsn();
+            session.setAttribute("ssn", ssn);
+            String mem_nm = loginDto.getMem_nm();
+            session.setAttribute("mem_nm", mem_nm);
+            String phone_num = loginDto.getPhone_num();
+            session.setAttribute("phone_num", phone_num);
+
+            //주민등록번호, 이름, 전화번호
+            model.addAttribute("memberDto", loginDto);
+
+            //로그인 유지 체크박스가 선택되었을 때
+            if (rememberMe != null && rememberMe.equals("on")) {
+                //"remember_me" 쿠키 생성 및 설정 (예: 7일 동안 유지)
+                Cookie rememberMeCookie = new Cookie("remember_me", "true");
+                rememberMeCookie.setMaxAge(7 * 24 * 60 * 60);
+                response.addCookie(rememberMeCookie);
+            }
+            return "redirect:/jgig/";
+        } else {
+            //로그인 실패 (회원이 없거나 비밀번호가 틀림)
             String errorMessage = "아이디나 비밀번호를 다시 확인해주세요.";
             model.addAttribute("loginError", errorMessage);
-
-
             return "login/login_form";
         }
-        session.setAttribute("loggedIn", true);
-        String id = loginDto.getMem_id();
-        session.setAttribute("mem_id", id);
-        String ssn = loginDto.getSsn();
-        session.setAttribute("ssn", ssn);
-        String mem_nm = loginDto.getMem_nm();
-        session.setAttribute("mem_nm", mem_nm);
-        String phone_num = loginDto.getPhone_num();
-        session.setAttribute("phone_num", phone_num);
-        
-        //주민등록번호, 이름, 전화번호
-        model.addAttribute("memberDto", loginDto);
-        
-        // 로그인 유지 체크박스가 선택되었을 때
-        if (rememberMe != null && rememberMe.equals("on")) {
-            // "remember_me" 쿠키 생성 및 설정 (예: 7일 동안 유지)
-            Cookie rememberMeCookie = new Cookie("remember_me", "true");
-            rememberMeCookie.setMaxAge(7 * 24 * 60 * 60); // 7일 (초 단위)
-            response.addCookie(rememberMeCookie);
-        }
-        
-        return "redirect:/jgig/";
-    } 
-    
+    }
+
 //    @GetMapping("/jgig/main")
 //    public String loadmain() {
 //        return "login/login_main";
@@ -99,13 +109,13 @@ public class MemberController {
         session.invalidate();
         return "redirect:/jgig/";
     }
-    
+
 //    @PostMapping("/jgig/logout")
 //    public String logout(HttpSession session) { // 로그아웃
 //        session.invalidate();
 //        return "redirect:/jgig/login";
 //    }
-    
+
 //    @GetMapping("/jgig/member_detail")
 //    public String todetailPage(@RequestParam("mem_id") , HttpSession session, Model model) { // 회원 정보 수정 페이지
 //        String mem_id = (String) session.getAttribute("mem_id");
