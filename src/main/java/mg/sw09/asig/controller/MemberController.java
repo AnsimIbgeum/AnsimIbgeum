@@ -26,7 +26,7 @@ public class MemberController {
     private PointMapper pointMapper;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder; //비밀번호 해싱 기능 인터페이스
 
     @GetMapping("/jgig/register")
     public String toSignupPage() { // 회원가입 페이지
@@ -149,6 +149,10 @@ public class MemberController {
     public String toUpdatePage(MemberDto dto, HttpSession session, Model model) { // 회원 정보 수정 페이지
         String mem_id = (String) session.getAttribute("mem_id");
         MemberDto update_dto = memberMapper.detail(mem_id);
+
+        //비밀번호는 수정 페이지에 노출되지 않도록 수정
+        update_dto.setMem_pw("");
+
         model.addAttribute("memberDto", update_dto);
         return "member/update";
     }
@@ -157,6 +161,17 @@ public class MemberController {
     public String Update(MemberDto dto, HttpSession session, Model model) { // 회원 정보 수정
         String mem_id = (String) session.getAttribute("mem_id");
         dto.setMem_id(mem_id);
+
+        if (dto.getMem_pw() == null || dto.getMem_pw().trim().isEmpty()) {
+            //비밀번호 입력 X -> DB에서 기존 비밀번호 가져와서 설정 (비밀번호 유지)
+            MemberDto origin = memberMapper.detail(mem_id);
+            dto.setMem_pw(origin.getMem_pw());
+        } else {
+            //새 비밀번호 입력 -> 새 비밀번호 암호화 후, 설정
+            String encodedPw = passwordEncoder.encode(dto.getMem_pw());
+            dto.setMem_pw(encodedPw);
+        }
+
         memberMapper.update(dto);
         return "member/detail";
     }
