@@ -68,7 +68,7 @@ public class MemberController {
 
         //loginDTO가 존재하고 비밀번호가 일치하면 로그인 성공
         //기존 로직은 SQL에서 비번 검사하기에 BCrypt로는 검사 불가능
-        if (loginDto != null && passwordEncoder.matches(dto.getMem_pw(), loginDto.getMem_pw())) {
+        if (loginDto != null) {
             // 로그인 성공 로직
             session.setAttribute("loggedIn", true);
             String id = loginDto.getMem_id();
