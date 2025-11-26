@@ -1,80 +1,62 @@
 package mg.sw09.asig.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import mg.sw09.asig.entity.NoticeDto;
-import mg.sw09.asig.entity.Criteria;
-import mg.sw09.asig.mapper.NoticeMapper;
+import mg.sw09.asig.service.NoticeService;
+import mg.sw09.asig.service.NoticeService.NoticeDetailResult;
+import mg.sw09.asig.service.NoticeService.NoticeListResult;
+import mg.sw09.asig.service.NoticeService.NoticeSearchResult;
 
 @Controller
 public class NoticeController {
 
-	@Autowired
-	private NoticeMapper noticeMapper;
+    private final NoticeService noticeService;
 
-	// 공지사항 리스트
-	@GetMapping("jgig/notice_list")
-	public String notice_list_withPaging(@RequestParam(value = "pageNum", required = false) Integer pageNum,
-			Model model) {
-		int total = noticeMapper.getTotal();
+    public NoticeController(NoticeService noticeService) {
+        this.noticeService = noticeService;
+    }
 
-		if (pageNum == null)
-			pageNum = 1;
+    // 공지사항 리스트
+    @GetMapping("jgig/notice_list")
+    public String notice_list_withPaging(@RequestParam(value = "pageNum", required = false) Integer pageNum,
+                                         Model model) {
 
-		Criteria criteria = new Criteria(pageNum, total);
-		List<NoticeDto> list = noticeMapper.listWithPaging(criteria);
+        NoticeListResult result = noticeService.getNoticeList(pageNum);
 
-		model.addAttribute("total", total);
-		model.addAttribute("notice_list", list);
-		model.addAttribute("criteria", criteria);
+        model.addAttribute("total", result.total);
+        model.addAttribute("notice_list", result.list);
+        model.addAttribute("criteria", result.criteria);
 
-		return "notice/list";
-	}
+        return "notice/list";
+    }
 
-	// 공지사항 보기
-	@GetMapping("jgig/notice_detail")
-	public String notice_detail(@RequestParam("no") int no, Model model) {
+    // 공지사항 보기
+    @GetMapping("jgig/notice_detail")
+    public String notice_detail(@RequestParam("no") int no, Model model) {
 
-		NoticeDto dto = noticeMapper.findByNo(no);
-		noticeMapper.updateView(dto);
-		model.addAttribute("dto", dto);
+        NoticeDetailResult result = noticeService.getNoticeDetail(no);
+        model.addAttribute("dto", result.notice);
 
-		return "notice/detail";
-	}
+        return "notice/detail";
+    }
 
-	// 공지사항 검색
-	@GetMapping("jgig/notice_search_action")
-	public String notice_search_list_withPaging(@RequestParam(value = "searchTag", required = false) String searchTag,
-			@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "pageNum", required = false) Integer pageNum, Model model) {
-		if (pageNum == null)
-			pageNum = 1;
+    // 공지사항 검색
+    @GetMapping("jgig/notice_search_action")
+    public String notice_search_list_withPaging(
+            @RequestParam(value = "searchTag", required = false) String searchTag,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "pageNum", required = false) Integer pageNum,
+            Model model) {
 
-		Criteria criteria;
-		List<NoticeDto> list;
+        NoticeSearchResult result = noticeService.searchNotice(searchTag, keyword, pageNum);
 
-		if (searchTag.equals("제목")) {
-			int total = noticeMapper.getSearchTotalByTitle(keyword);
-			criteria = new Criteria(pageNum, searchTag, keyword, total);
-			list = noticeMapper.searchListWithPagingByTitle(criteria);
-			model.addAttribute("total", total);
-		} else {
-			int total = noticeMapper.getSearchTotalByMem(keyword);
-			criteria = new Criteria(pageNum, searchTag, keyword, total);
-			list = noticeMapper.searchListWithPagingByMem(criteria);
-			model.addAttribute("total", total);
-		}
+        model.addAttribute("total", result.total);
+        model.addAttribute("search_list", result.list);
+        model.addAttribute("criteria", result.criteria);
 
-		model.addAttribute("search_list", list);
-		model.addAttribute("criteria", criteria);
-
-		return "notice/search_list";
-	}
-
+        return "notice/search_list";
+    }
 }
