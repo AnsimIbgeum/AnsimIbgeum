@@ -11,7 +11,7 @@ Custom Css 클래스 이름 겹치지 않게 아래 추가해주시면 됩니다
 }
 
 .navcolor {
-	background-color: #FFFDE5;
+	background-color: #E6F7FF;
 }
 
 /* 드롭다운 메뉴를 초기에 숨김 */
@@ -58,7 +58,7 @@ Custom Css 클래스 이름 겹치지 않게 아래 추가해주시면 됩니다
 }
 
 .selectsidemenu {
-	background-color: #FFD64B;
+	background-color: #66B2FF;
 	border-radius: 10px;
 }
 
@@ -157,7 +157,7 @@ body, ul, li, p, a, label, input, div {
 
 .cardlistbtn {
 	font-size: 15px;
-	background-color: #FFD64B;
+	background-color: #66B2FF;
 	border: none;
 	border-radius: 5px;
 	padding: 0.3rem;
@@ -240,7 +240,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .card-sumit-btn {
 	font-size: 18px;
 	width: 20%;
-	background-color: #FFD64B;
+	background-color: #66B2FF;
 	border: none;
 	border-radius: 5px;
 	padding: 0.3rem;
@@ -248,7 +248,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .card-vaild-btn {
 	font-size: 18px;
-	background-color: #FFD64B;
+	background-color: #66B2FF;
 	border: none;
 	border-radius: 5px;
 	padding: 0.3rem 0.5rem;
@@ -265,7 +265,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .main_board {
 	width: 95%;
 	height: 400px;
-	background-color: #FFED8B;
+	background-color: #E6F7FF;
 	padding: 10px 15px;
 	margin: auto;
 	border-radius: 10px;
@@ -386,7 +386,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .att_btn {
 	width: 85%;
 	padding: 0.5rem;
-	background-image: linear-gradient(119deg, #ffdf74, #ffebb2 100%);
+	background-image: linear-gradient(119deg, #74C0FF, #A0D1FF 100%);
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
 	border: none;
 	border-radius: 50px;
@@ -408,7 +408,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 #template-mo-zay-hero-carousel { /*슬라이드 배너색깔*/
-	background: #FFC230 !important;
+    background: #66B2FF !important;
 	height: 350px;
 }
 
@@ -422,7 +422,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	width: 85%;
 	border-collapse: initial;
 	border-spacing: 0 10px;
-	background-color: #FFED8B;
+	background-color: #E6F7FF;
 	margin: auto;
 	border-radius: 10px;
 	padding: 10px;
@@ -488,7 +488,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 #ars-hr {
 	border: 0;
 	height: 5px;
-	background: #FFD64B;
+	background: #66B2FF;
 }
 
 .ars-table {
@@ -829,7 +829,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 /**슬라이드 배너**/
 #slide-banner {
-    background-color: #FFC230;
+    background-color: #66B2FF;
     position: relative; /* 부모로부터 상대적 위치 설정 */
     overflow: hidden; /* 내용 넘침을 숨김 */
 }
@@ -917,7 +917,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 .guid-summ{
 	padding: 2rem;
-    background-color: #FFF7D5;
+    background-color: #E6F7FF;
     border-radius: 20px;
 }
 .guid-summ a{
@@ -1166,7 +1166,7 @@ ul.word-list>li .inner {
 }
 
 .ccBtn-wrap .ccBtn {
-	background-color: #FFD64A;
+	background-color: #66B2FF;
 }
 .noinfo-wrap {
 	display: flex;
@@ -1183,7 +1183,7 @@ ul.word-list>li .inner {
 	min-width: 40px;
 	min-height: 40px;
 	border: 5px solid rgba(255,255,255,0.1);
-	border-right: 5px solid #FFD64A;
+	border-right: 5px solid #66B2FF;
 	border-radius: 50%; 
 	animation: spinner 1s linear infinite; 
 }
@@ -1229,7 +1229,7 @@ input[id = "input_text"] {
 .button-like-link {
 	display: inline-block;
 	padding: 7px 15px;
-	background-color: #FFD64A;
+	background-color: #66B2FF;
 	color: #000000;
 	text-decoration: none;
  	cursor: pointer;
@@ -2199,7 +2199,7 @@ input[id = "input_text"] {
 
 .button_tag {
     font-size: 16px;
-    background-color: #FFD64B;
+    background-color: #66B2FF;
     border: none;
     border-radius: 5px;
     padding: 0.3rem 0.5rem;
