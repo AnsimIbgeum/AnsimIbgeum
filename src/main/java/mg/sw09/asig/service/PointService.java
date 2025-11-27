@@ -22,8 +22,6 @@ public interface PointService {
     // 출석체크
     CheckinResult checkIn(String memId);
 
-    // ===== 결과 DTO들 =====
-
     class FilterResult {
         public final int total;
         public final int startPage;

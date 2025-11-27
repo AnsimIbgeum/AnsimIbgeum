@@ -3,7 +3,6 @@ import java.util.List;
 import mg.sw09.asig.entity.AccountDto;
 
 public interface AccountService {
-//    AccountDetailDto getAccountDetail(Long memberId, String accountNo);
 
     // 회원 본인 확인
     boolean checkMember(String memIdFromSession,
@@ -13,13 +12,13 @@ public interface AccountService {
                         String inputSsn,
                         String inputPhone);
 
-    // 계좌 개설 (포인트/연습 여부까지 포함한 결과 반환)
+    // 계좌 개설
     OpenAccountResult openAccount(AccountDto dto, String memId);
 
-    // 계좌 목록 + 페이징 정보를 한 번에 제공
+    // 계좌 목록 + 페이징 정보 제공
     AccountListResult getAccountList(String memId, int currentPage);
 
-    // 계좌 상세 조회 (계좌관리/해지 폼에서 공통 사용)
+    // 계좌 상세 조회
     AccountDto getAccount(long account);
 
     // 비밀번호 수정

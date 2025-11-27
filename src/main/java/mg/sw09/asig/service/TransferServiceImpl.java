@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import mg.sw09.asig.entity.AccountDto;
 import mg.sw09.asig.entity.TransferDto;
 import mg.sw09.asig.mapper.TransferMapper;
-import mg.sw09.asig.service.TransferService.HistoryResult;
-import mg.sw09.asig.service.TransferService.TransferResult;
 
 @Service
 public class TransferServiceImpl implements TransferService {

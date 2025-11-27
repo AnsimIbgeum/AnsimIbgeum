@@ -22,7 +22,6 @@ public interface MemberService {
     // 회원 탈퇴 (비밀번호 검증 포함)
     boolean deleteMember(String memId, String rawPassword);
 
-    // ===== 결과 DTO =====
     class LoginResult {
         public final boolean success;
         public final MemberDto member;

@@ -27,7 +27,6 @@ public interface TransferService {
     HistoryResult getCalendarHistory(long selectedAccount, int currentPage,
                                      String startDate, String endDate, String memId, String practiceType);
 
-    // ====== 결과 DTO들 ======
 
     class TransferResult {
         public final boolean success;

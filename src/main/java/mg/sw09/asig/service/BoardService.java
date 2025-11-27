@@ -38,8 +38,6 @@ public interface BoardService {
     SuggestionResult suggestBoard(Integer brdId, String memId, BoardDto dto);
     SuggestionResult declareBoard(Integer brdId, String memId, BoardDto dto);
 
-    // ===== 결과 DTO들 =====
-
     class BoardListResult {
         public final int total;
         public final List<BoardDto> list;

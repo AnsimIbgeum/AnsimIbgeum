@@ -16,8 +16,6 @@ public interface NoticeService {
     // 공지사항 검색 (제목/작성자)
     NoticeSearchResult searchNotice(String searchTag, String keyword, Integer pageNum);
 
-    // ===== 결과 DTO들 =====
-
     class NoticeListResult {
         public final int total;
         public final List<NoticeDto> list;

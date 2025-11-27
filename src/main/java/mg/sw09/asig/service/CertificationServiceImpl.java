@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mg.sw09.asig.mapper.CardMapper;
-import mg.sw09.asig.service.CertificationService.CertificationResult;
 
 @Service
 public class CertificationServiceImpl implements CertificationService {
