@@ -25,7 +25,8 @@ import mg.sw09.asig.service.AccountService.UpdatePasswordResult;
 
 
 @Controller
-public class AccountController {
+public class
+        AccountController {
 
     @Autowired
     private final AccountService accountService;

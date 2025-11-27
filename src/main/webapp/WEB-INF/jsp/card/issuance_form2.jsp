@@ -28,8 +28,8 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="/jgig/">
-                <img src="/assets/img/KB-logo.png" width="30" height="30" alt="">
-                <img src="/assets/img/jgig-icon.png"  height="45" alt="">
+                <%--                <img src="/assets/img/KB-logo.png" width="30" height="30" alt="">--%>
+                <img src="/assets/img/asig-icon.png"  height="100" alt="">
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

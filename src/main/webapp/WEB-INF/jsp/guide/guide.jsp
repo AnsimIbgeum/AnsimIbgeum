@@ -39,8 +39,7 @@
 			class="container d-flex justify-content-between align-items-center">
 
 			<a class="navbar-brand text-success logo h1 align-self-center"
-				href="/jgig/"> <img src="/assets/img/KB-logo.png" width="30"
-				height="30" alt=""> <img src="/assets/img/jgig-icon.png"
+				href="/jgig/"> <img src="/assets/img/asig-icon.png"
 				height="45" alt="">
 			</a>
 
