@@ -58,7 +58,7 @@ Custom Css 클래스 이름 겹치지 않게 아래 추가해주시면 됩니다
 }
 
 .selectsidemenu {
-	background-color: #FFD64B;
+	background-color: #66B2FF;
 	border-radius: 10px;
 }
 
@@ -248,7 +248,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .card-vaild-btn {
 	font-size: 18px;
-	background-color: #FFD64B;
+	background-color: #66B2FF;
 	border: none;
 	border-radius: 5px;
 	padding: 0.3rem 0.5rem;
@@ -488,7 +488,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 #ars-hr {
 	border: 0;
 	height: 5px;
-	background: #FFD64B;
+	background: #66B2FF;
 }
 
 .ars-table {
@@ -1166,7 +1166,7 @@ ul.word-list>li .inner {
 }
 
 .ccBtn-wrap .ccBtn {
-	background-color: #FFD64A;
+	background-color: #66B2FF;
 }
 .noinfo-wrap {
 	display: flex;
@@ -1183,7 +1183,7 @@ ul.word-list>li .inner {
 	min-width: 40px;
 	min-height: 40px;
 	border: 5px solid rgba(255,255,255,0.1);
-	border-right: 5px solid #FFD64A;
+	border-right: 5px solid #66B2FF;
 	border-radius: 50%; 
 	animation: spinner 1s linear infinite; 
 }
@@ -1229,7 +1229,7 @@ input[id = "input_text"] {
 .button-like-link {
 	display: inline-block;
 	padding: 7px 15px;
-	background-color: #FFD64A;
+	background-color: #66B2FF;
 	color: #000000;
 	text-decoration: none;
  	cursor: pointer;
@@ -2199,7 +2199,7 @@ input[id = "input_text"] {
 
 .button_tag {
     font-size: 16px;
-    background-color: #FFD64B;
+    background-color: #66B2FF;
     border: none;
     border-radius: 5px;
     padding: 0.3rem 0.5rem;

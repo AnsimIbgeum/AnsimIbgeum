@@ -23,7 +23,7 @@ import mg.sw09.asig.mapper.AccountMapper;
 
 
 @Controller
-public class wq
+public class
         AccountController {
 
 	@Autowired

@@ -210,7 +210,7 @@
 						<!-- 여기에 넣으시며 됩니당 -->
 						<div id="content">
 							<table class="table table-hover">
-								<tr style="background: #FFD64A;">
+								<tr style="background: #66B2FF;">
 									<th  style="border-top-left-radius: 15px;">번호</th>
 									<th>카테고리</th>
 									<th>제목</th>

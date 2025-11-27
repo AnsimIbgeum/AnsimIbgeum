@@ -112,7 +112,7 @@
           }
     
           .submit-btn {
-            background-color: #FFD64B;
+            background-color: #66B2FF;
             color: rgba(256,256,256,0.7);
             border:0;
             border-radius: 15px;
