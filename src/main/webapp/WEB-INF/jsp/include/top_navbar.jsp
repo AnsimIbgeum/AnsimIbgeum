@@ -60,8 +60,8 @@
 	<div id = "top-menu">
 		<nav id = "nav1">
 				<ul>
-					<li><img id="img1" src="../resources/img/KB.png"></li>
-					<li><img id="img2" src="../resources/img/지금입금.png"></li>
+					<li><img id="img1" src="../resources/img/mju.png"></li>
+					<li><img id="img2" src="../resources/img/안심입금.png"></li>
 				</ul>
 		</nav id = "nav2">
 		<nav>

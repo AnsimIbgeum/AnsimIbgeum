@@ -13,7 +13,7 @@
     <artifactId>asig</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>  <name>jgig</name>
-    <description>지금입금</description>
+    <description>안심입금</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

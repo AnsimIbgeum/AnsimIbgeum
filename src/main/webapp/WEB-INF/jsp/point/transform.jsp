@@ -8,7 +8,7 @@
 <head>
 
 
-    <title>지금입금</title>
+    <title>안심입금</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
