@@ -11,27 +11,24 @@ import mg.sw09.asig.mapper.MemberMapper;
 import mg.sw09.asig.mapper.PointMapper;
 
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
     private final PointMapper pointMapper;
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public MemberServiceImpl(MemberMapper memberMapper,
-                             PointMapper pointMapper,
-                             PasswordEncoder passwordEncoder) {
-        this.memberMapper = memberMapper;
-        this.pointMapper = pointMapper;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final AESUtil aesUtil;
 
     @Override
     @Transactional
     public void register(MemberDto dto, String ssn1, String ssn2) {
         String ssn = ssn1 + ssn2;
-        dto.setSsn(ssn);
 
+        //주민번호: AES 암호화
+        String encryptedSSN = aesUtil.encrypt(ssn);
+        dto.setSsn(encryptedSSN);
+
+        //비밀번호: 단방향 해시 암호화
         String encodedPassword = passwordEncoder.encode(dto.getMem_pw());
         dto.setMem_pw(encodedPassword);
 
