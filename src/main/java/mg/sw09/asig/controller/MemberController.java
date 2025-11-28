@@ -3,9 +3,11 @@ package mg.sw09.asig.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,11 +32,27 @@ public class MemberController {
     }
 
     @PostMapping("/jgig/register")
-    public String signup(MemberDto dto,
+    public String signup(@Valid MemberDto dto,
+                         BindingResult bindingResult,
                          @RequestParam("ssn_1") String ssn_1,
                          @RequestParam("ssn_2") String ssn_2,
                          Model model,
                          RedirectAttributes redirectAttributes) { // 회원가입
+
+        //유효성 검사 실패 시, 로직
+        if (bindingResult.hasErrors()) {
+            // 에러가 있다면 다시 회원가입 폼으로 리턴
+
+            // 입력했던 값 유지 (비밀번호 제외)
+            dto.setMem_pw("");
+            model.addAttribute("memberDto", dto);
+
+            // 첫 번째 에러 메시지를 모델에 담아서 alert 띄우기
+            String firstErrorMessage = bindingResult.getAllErrors().get(0).getDefaultMessage();
+            model.addAttribute("valid_msg", firstErrorMessage);
+
+            return "member/register";
+        }
 
         try {
             memberService.register(dto, ssn_1, ssn_2);

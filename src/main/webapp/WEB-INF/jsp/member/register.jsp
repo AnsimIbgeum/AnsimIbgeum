@@ -42,6 +42,11 @@
             if (successMessage) {
                 $('#successModal').modal('show');
             }
+
+            var validMsg = "${valid_msg}";
+            if (validMsg && validMsg !== "") {
+                alert(validMsg);
+            }
         </script>
         <style>
     .form-structor {
