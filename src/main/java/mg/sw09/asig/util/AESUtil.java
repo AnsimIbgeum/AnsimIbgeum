@@ -1,29 +1,25 @@
 package mg.sw09.asig.util;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+@Component
 public class AESUtil {
 
-    //암호화 키 (32비트 -> 32자)
-    private static String SECRET_KEY;
+    //암호화키 (32비트)
+    @Value("${custom.security.aes-key}")
+    private String SECRET_KEY;
+
     private static final String ALGORITHM = "AES";
 
-    //암호화키 설정
-    @Value("${custom.security.aes-key}")
-    public void setSecretKey(String key) {
-        if(key.length() < 32) {
-            key = String.format("%-32s", key).replace(' ', '0');
-        }
-        AESUtil.SECRET_KEY = key;
-    }
-
     //암호화
-    public static String encrypt(String plainText) {
+    public String encrypt(String plainText) {
+        if (plainText == null) return null;
         try {
             SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), ALGORITHM);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -38,7 +34,7 @@ public class AESUtil {
     }
 
     //복호화
-    public static String decrypt(String encryptedText) {
+    public String decrypt(String encryptedText) {
         try {
             SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), ALGORITHM);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
