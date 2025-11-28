@@ -1,17 +1,38 @@
 package mg.sw09.asig.entity;
 
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class MemberDto {
 
-	private String mem_id;
-	private String mem_pw;
-	private String mem_nm;
-	private String nickname;
-	private String phone_num;
-	private String ssn;
-	private String mem_stat;
-	private int score;
-	private int authority;
+    @NotBlank(message = "아이디는 필수 입력 값입니다.")
+    @Pattern(regexp = "^[a-z0-9]{4,15}$", message = "아이디는 영문 소문자와 숫자 4~15자여야 합니다.")
+    private String mem_id;
+
+    @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$",
+            message = "비밀번호는 8~20자 영문, 숫자, 특수문자를 포함해야 합니다.")
+    private String mem_pw;
+
+    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @Size(max = 15, message = "이름은 15자를 초과할 수 없습니다.")
+    private String mem_nm;
+
+    @NotBlank(message = "닉네임은 필수 입력 값입니다.")
+    @Size(max = 20, message = "닉네임은 20자를 초과할 수 없습니다.")
+    private String nickname;
+
+    @NotBlank(message = "전화번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", message = "올바른 전화번호 형식이 아닙니다.")
+    private String phone_num;
+
+    private String ssn;
+
+    private String mem_stat;
+    private int score;
+    private int authority;
 
 	public MemberDto() {
 		// TODO Auto-generated constructor stub
