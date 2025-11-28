@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>지금입금</title>
+<title>안심입금</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -387,8 +387,8 @@
 			var ssn = document.querySelector('input[name="cd_ssn"]').value;
 			var tel = document.querySelector('input[name="cd_phone"]').value;
 
+            //|| ssn도 비교 필요. 현재 평문으로 입력되기에 비교를 위해 임시 제거"
 			if (name !== "${sessionScope.mem_nm}"
-					|| ssn !== "${sessionScope.ssn}"
 					|| tel !== "${sessionScope.phone_num}") {
 				openModal("카드발급","회원 정보가 일치하지 않습니다.");
 				

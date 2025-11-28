@@ -9,7 +9,7 @@
 <html lang="en">
 
 <head>
-<title>지금입금</title>
+<title>안심입금</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -171,7 +171,7 @@ https://templatemo.com/tm-559-zay-shop
 							<img src="/assets/img/light-bulb.png" width="50px">금융 거래 연습
 						</p>
 						<p class="banner-subtitle">
-							실제 인터넷 뱅킹을 하다가 실수할까 겁이나시나요? <br>지금입금 서비스를 사용해보세요! 
+							실제 인터넷 뱅킹을 하다가 실수할까 겁이나시나요? <br>안심입금 서비스를 사용해보세요! 
 						</p>
 						
 						<p class="banner-content">

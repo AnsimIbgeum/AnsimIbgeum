@@ -2,6 +2,7 @@ package mg.sw09.asig.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import mg.sw09.asig.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +14,12 @@ import mg.sw09.asig.mapper.AccountMapper;
 public class AccountServiceImpl implements AccountService{
     private final AccountMapper accountMapper;
     private final int POINT = 5;
+    private final AESUtil aesUtil;
 
     @Autowired
-    public AccountServiceImpl(AccountMapper accountMapper) {
+    public AccountServiceImpl(AccountMapper accountMapper, AESUtil aesUtil) {
         this.accountMapper = accountMapper;
+        this.aesUtil = aesUtil;
     }
 
     @Override
@@ -32,6 +35,7 @@ public class AccountServiceImpl implements AccountService{
             return false;
         }
 
+        inputSsn = aesUtil.encrypt(inputSsn);
         String memNameFromDb = accountMapper.findById(memIdFromSession);
 
         return inputName.equals(memNameFromDb)

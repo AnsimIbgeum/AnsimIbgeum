@@ -2,7 +2,10 @@ package mg.sw09.asig.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import mg.sw09.asig.mapper.MemberMapper;
+import mg.sw09.asig.util.AESUtil;
+import mg.sw09.asig.util.MaskingUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,15 +13,13 @@ import mg.sw09.asig.entity.CardDto;
 import mg.sw09.asig.mapper.CardMapper;
 
 @Service
+@RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
 
     private final CardMapper cardMapper;
+    private final MemberMapper memberMapper;
+    private final AESUtil aesUtil;
     private static final int POINT = 10;
-
-    @Autowired
-    public CardServiceImpl(CardMapper cardMapper) {
-        this.cardMapper = cardMapper;
-    }
 
     @Override
     @Transactional
@@ -105,6 +106,12 @@ public class CardServiceImpl implements CardService {
         }
 
         List<CardDto> listPaging = cardMapper.list_paging(memId, startRow, endRow);
+
+        //카드번호 마스킹 처리
+        for (CardDto card : listPaging) {
+            String maskedNum = MaskingUtil.maskCardNum(card.getCd_num());
+            card.setCd_num(maskedNum);
+        }
 
         return new CardListResult(listPaging, currentPage, startPage, endPage, maxPage);
     }
