@@ -46,8 +46,9 @@ public class SearchWordServiceImpl implements SearchWordService {
             // 전체 인기 검색어
             return searchWordMapper.allAgeList();
         }
-        int memAge = searchWordMapper.selectAge(memId);
-        return searchWordMapper.list(memAge);
+        //현재 주민번호가 암호화되었기에 나이 추출 불가. 추후에 calculateAge로 직접 나이 추출하는 로직 필요
+        //int memAge = searchWordMapper.selectAge(memId);
+        return searchWordMapper.list(20);
     }
 
     @Override
@@ -58,10 +59,10 @@ public class SearchWordServiceImpl implements SearchWordService {
 
         // 로그인 했으면 popular_word 테이블에 기록
         if (memId != null && !memId.isEmpty()) {
-            int memAge = searchWordMapper.selectAge(memId);
+            //int memAge = searchWordMapper.selectAge(memId);
             PopularWordDto dto = new PopularWordDto();
             dto.setPw_word(normalizedWord);
-            dto.setPw_age(memAge);
+            dto.setPw_age(20);
             dto.setMem_id(memId);
             searchWordMapper.insert(dto);
         }
