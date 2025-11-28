@@ -1,28 +1,26 @@
 package mg.sw09.asig.service;
 
 import lombok.RequiredArgsConstructor;
+import mg.sw09.asig.entity.MemberDto;
+import mg.sw09.asig.mapper.MemberMapper;
 import mg.sw09.asig.util.AESUtil;
+import mg.sw09.asig.util.MaskingUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import mg.sw09.asig.entity.MemberDto;
-import mg.sw09.asig.mapper.MemberMapper;
-import mg.sw09.asig.mapper.PointMapper;
 
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
-    private final PointMapper pointMapper;
     private final PasswordEncoder passwordEncoder;
     private final AESUtil aesUtil;
 
     @Override
     @Transactional
     public void register(MemberDto dto, String ssn1, String ssn2) {
-        String ssn = ssn1 + ssn2;
+        String ssn = ssn1 + "-" + ssn2;
 
         //주민번호: AES 암호화
         String encryptedSSN = aesUtil.encrypt(ssn);
@@ -48,9 +46,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public MemberDto getMemberDetail(String memId) {
-        return memberMapper.detail(memId);
+    public MemberDto getMemberDetail(String mem_id) {
+        MemberDto member = memberMapper.detail(mem_id);
+        if (member != null) {
+            //주민등록번호 복호화
+            String decryptedSSN = aesUtil.decrypt(member.getSsn());
+
+            //주민등록번호 마스킹 처리
+            String maskedSSN = MaskingUtil.maskSSN(decryptedSSN);
+            member.setSsn(maskedSSN);
+
+            //비밀번호 제거 (보안상 화면에 노출 X)
+            member.setMem_pw("");
+        }
+        return member;
     }
 
     @Override
