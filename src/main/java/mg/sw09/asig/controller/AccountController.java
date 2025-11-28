@@ -82,7 +82,7 @@ public class
         Map<String, Object> response = new HashMap<>();
 
         actName = act_name;
-        ssn = ssn1 + ssn2;
+        ssn = ssn1 + "-" + ssn2;
         phone_num = phone_num1 + phone_num2 + phone_num3;
         memName = mem_nm;
 
