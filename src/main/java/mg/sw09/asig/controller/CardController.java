@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import mg.sw09.asig.service.CardService;
+import mg.sw09.asig.util.MaskingUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,9 @@ public class CardController {
 
 	@Autowired
 	private CardMapper cardMapper;
+
+    @Autowired
+    private CardService cardService;
 
 	/** 카드 관리 로직 **/
 	@PostMapping("/jgig/card_pw_action")
@@ -141,45 +146,27 @@ public class CardController {
 	}
 
 	/** 카드조회 로직 **/
-	@GetMapping("/jgig/card_list")
-	public String card_list(HttpSession session, Model model,
-			@RequestParam(value = "pageNum", defaultValue = "1") String pageNum) {
-		String returnVal = login_check(session);
-		if (returnVal.equals("redirect:/jgig/login"))
-			return returnVal;
-		String mem_id = returnVal;
+    @GetMapping("/jgig/card_list")
+    public String card_list(HttpSession session, Model model,
+                            @RequestParam(value = "pageNum", defaultValue = "1") String pageNum) {
 
-		List<CardDto> card_list = cardMapper.list(mem_id);
+        String returnVal = login_check(session);
+        if (returnVal.equals("redirect:/jgig/login"))
+            return returnVal;
+        String mem_id = returnVal;
 
-		int cnt = card_list.size(); // 카드 리스트 개수
+        int currentPage = Integer.parseInt(pageNum);
 
-		// 페이징
-		int pageSize = 5;// 한 페이지에 출력될 글 수
-		int maxPage = (int) (Math.ceil((double) cnt / pageSize));
-		int blockLimit = 5; // 하단에 보여줄 페이지의 수
+        CardService.CardListResult result = cardService.getCardList(mem_id, currentPage);
 
-		// 첫행번호를 계산
-		int currentPage = Integer.parseInt(pageNum);
-		int startRow = (currentPage - 1) * pageSize + 1;
-		pageSize += startRow;
+        model.addAttribute("card_list", result.list);
+        model.addAttribute("page", result.currentPage);
+        model.addAttribute("startPage", result.startPage);
+        model.addAttribute("maxPage", result.maxPage);
+        model.addAttribute("endPage", result.endPage);
 
-		int startPage = (int) (Math.ceil((double) currentPage / blockLimit) - 1) * blockLimit + 1;
-		int endPage = startPage + blockLimit - 1;
-		if (endPage > maxPage) {
-			endPage = maxPage;
-		}
-
-		
-		List<CardDto> list_paging = cardMapper.list_paging(mem_id, startRow, pageSize);
-		model.addAttribute("card_list", list_paging);
-		
-		model.addAttribute("page", currentPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("maxPage", maxPage);
-		model.addAttribute("endPage", endPage);
-
-		return "card/list";
-	}
+        return "card/list";
+    }
 
 	/** 카드발급 로직 **/
 

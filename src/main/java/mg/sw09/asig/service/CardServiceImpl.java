@@ -2,12 +2,10 @@ package mg.sw09.asig.service;
 
 import java.util.List;
 
-import ch.qos.logback.classic.Logger;
-import mg.sw09.asig.entity.MemberDto;
+import lombok.RequiredArgsConstructor;
 import mg.sw09.asig.mapper.MemberMapper;
 import mg.sw09.asig.util.AESUtil;
 import mg.sw09.asig.util.MaskingUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,19 +13,13 @@ import mg.sw09.asig.entity.CardDto;
 import mg.sw09.asig.mapper.CardMapper;
 
 @Service
+@RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
 
     private final CardMapper cardMapper;
     private final MemberMapper memberMapper;
     private final AESUtil aesUtil;
     private static final int POINT = 10;
-
-    @Autowired
-    public CardServiceImpl(CardMapper cardMapper, MemberMapper memberMapper, AESUtil aesUtil) {
-        this.cardMapper = cardMapper;
-        this.memberMapper = memberMapper;
-        this.aesUtil = aesUtil;
-    }
 
     @Override
     @Transactional
