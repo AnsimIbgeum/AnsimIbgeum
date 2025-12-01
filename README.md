@@ -1,11 +1,10 @@
 ## OSS 분석 및 개선 프로젝트 
 
 **사용할 OSS** : https://github.com/kkongdo/JigeumIbgeum <br>
-**주제** : 디지털 뱅킹 금융 서비스 입문자를 위한 금융 교육 및 연습 웹 서비스 (서비스 명 : **지금입금**)<br>
-**팀** : Ditto (**Di**gital **T**raining for **T**omorrow's **O**nline) <br>
-**개발 인원** : 5명(kkongdo, hejoo345, dayoonn, SuHyeon2Park, syc98syc) <br>
-
+**OSS 주제** : 디지털 뱅킹 금융 서비스 입문자를 위한 금융 교육 및 연습 웹 서비스 (서비스 명 : **지금입금**)<br>
+**OSS 개발자** : 5명 (kkongdo, hejoo345, dayoonn, SuHyeon2Park, syc98syc) <br>
 <br>
+**프로젝트** : **안심입금** (안전하고 심플한, 금융서비스 입문자를 위한 금융 교육 및 연습 웹 서비스) <br>
 
 ## 기술 스택
 #### Frontend

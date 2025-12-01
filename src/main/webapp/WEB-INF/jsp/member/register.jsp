@@ -148,20 +148,19 @@
                         <span>회원가입</span></h2>
                             <div class="form-holder">
         
-                    <input type="text" name="mem_nm" class="input" placeholder="이름을 입력해주세요"/>
+                    <input type="text" name="mem_nm" class="input" placeholder="이름을 입력해주세요" value="${memberDto.mem_nm}"/>
                
                                         <div style=" border-bottom : 1px solid #0000001f; display: flex; justify-content: space-between;">
                     <input type="text" style=" border-bottom : none;" name="ssn_1" class="input" placeholder="주민등록번호 앞자리" oninput="formatSSN(this)" maxlength = 6/>
                       <hr style=" border: 1px solid #0000001f;">
-                      <input type="text" name="ssn_2" class="input" placeholder="주민등록번호 뒷자리" oninput="formatSSN(this)"  maxlength =7 />
+                      <input type="text" name="ssn_2" class="input" placeholder="주민등록번호 뒷자리" oninput="formatSSN(this)"  maxlength =7/>
                     </div>
                
-                    <input type="text" name="phone_num"class="input" placeholder="전화번호를 입력해주세요" maxlength =11 />
+                    <input type="text" name="phone_num"class="input" placeholder="전화번호를 입력해주세요" maxlength =11 value="${memberDto.phone_num}"/>
                
-                    <input type="text" name="nickname"class="input" placeholder="닉네임을 입력해주세요"/>
+                    <input type="text" name="nickname"class="input" placeholder="닉네임을 입력해주세요" value="${memberDto.nickname}"/>
                 
-                    <input type="text" name="mem_id" class="input"placeholder="아이디를 입력해주세요"/>
-                
+                    <input type="text" name="mem_id" class="input"placeholder="아이디를 입력해주세요" value="${memberDto.mem_id}"/>
                     <input type="password" name="mem_pw"class="input" id="mem_pw" placeholder="비밀번호를 입력해주세요" required/>
                 
                     <input type="password" name="mem_pw_check"class="input" id="mem_pw_check" placeholder="비밀번호를 한번 더 입력해주세요" required/>
